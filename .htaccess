@@ -1,0 +1,33 @@
+RewriteEngine On
+
+<IfModule mod_headers.c>
+Header set Access-Control-Allow-Origin "*"
+Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Authorization"
+</IfModule>
+
+# Production: DocumentRoot points at this folder (e.g. https://dpsgnext.com/).
+# For local subfolder testing (http://localhost/dpsgomtinagarjnrext/), use: RewriteBase /dpsgomtinagarjnrext/
+RewriteBase /
+
+# Production: redirect /Site requests to live site (skip localhost)
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)$ [NC]
+RewriteCond %{REQUEST_URI} ^/Site [NC]
+RewriteRule ^.*$ https://dpsgnext.com/? [R=301,L]
+
+# HTTP → HTTPS (skip local dev hosts)
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^localhost [NC]
+RewriteCond %{HTTP_HOST} !^127\.0\.0\.1 [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Friendly URLs before generic extensionless stub
+RewriteRule ^home/?$ index.php [NC,L]
+RewriteRule ^blog/([A-Za-z0-9-]+)/?$ detail.php?slug=$1 [NC,L,QSA]
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]
+
+# /photo-gallery → photo-gallery.php in this folder
+RewriteRule ^([A-Za-z0-9-]+)/?$ $1.php [L,QSA]
