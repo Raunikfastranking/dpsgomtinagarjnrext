@@ -45,25 +45,44 @@ $pageApiUrl = "https://dps.allenhouseschools.com/api/pages/$pageSlug";
 // Fetch page data
 require_once __DIR__ . '/proxy/config.php';
 
-$pageCh = curl_init($pageApiUrl);
-curl_setopt_array($pageCh, [
-    CURLOPT_RETURNTRANSFER => true,
-    CURLOPT_TIMEOUT        => 15,
-    CURLOPT_CONNECTTIMEOUT => 5,
-    CURLOPT_SSL_VERIFYPEER => false,
-    CURLOPT_HTTPHEADER     => api_auth_headers(),
-]);
-$pageResponse = curl_exec($pageCh);
-$pageHttpCode = curl_getinfo($pageCh, CURLINFO_HTTP_CODE);
-curl_close($pageCh);
+// Stale-while-revalidate: serve cached copy instantly, refresh expired
+// entries in the background so visitors never wait on the CMS API.
+$slugEndpoint = "/pages/$pageSlug";
+api_cache_track($slugEndpoint, $slugEndpoint);
+$slugCache = api_cache_get($slugEndpoint);
+$slugFresh = $slugCache !== null && (time() - $slugCache['fetched_at'] < API_CACHE_TTL);
 
-if ($pageResponse === false || empty($pageResponse) || $pageHttpCode !== 200) {
-    header("HTTP/1.0 404 Not Found");
-    include "404.php";
-    exit;
+if ($slugFresh) {
+    $pageData2 = $slugCache['data'];
+} else {
+    if ($slugCache !== null) {
+        // Stale copy exists -> serve it now, refresh in background.
+        $pageData2 = $slugCache['data'];
+        api_trigger_background_refresh();
+    } else {
+        $pageCh = curl_init($pageApiUrl);
+        curl_setopt_array($pageCh, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 15,
+            CURLOPT_CONNECTTIMEOUT => 5,
+            CURLOPT_SSL_VERIFYPEER => false,
+            CURLOPT_HTTPHEADER     => api_auth_headers(),
+        ]);
+        $pageResponse = curl_exec($pageCh);
+        $pageHttpCode = curl_getinfo($pageCh, CURLINFO_HTTP_CODE);
+        curl_close($pageCh);
+
+        if ($pageResponse === false || empty($pageResponse) || $pageHttpCode !== 200) {
+            header("HTTP/1.0 404 Not Found");
+            include "404.php";
+            exit;
+        }
+
+        $pageData2 = json_decode($pageResponse, true);
+        api_cache_set($slugEndpoint, $pageData2);
+    }
 }
 
-$pageData2 = json_decode($pageResponse, true);
 if (!isset($pageData2['data']) || empty($pageData2['data'])) {
     header("HTTP/1.0 404 Not Found");
     include "404.php";
