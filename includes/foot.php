@@ -410,13 +410,13 @@ grades.sort((a, b) => {
             };
 
             try {
-                const res = await fetch(`${BASE_URL}/proxy/admission-proxy`, {
+                const res = await fetch(`proxy/admission-proxy`, {
                     method:  "POST",
                     headers: { "Content-Type": "application/json" },
                     body:    JSON.stringify(payload)
                 });
                 if (!res.ok) throw new Error(`HTTP error ${res.status}`);
-                await res.json();
+                await res.json().catch(() => null);
 
                 const successPopup = document.getElementById("esuccessPopup") || document.getElementById("AdmissionFormPopup");
                 if (successPopup) {
