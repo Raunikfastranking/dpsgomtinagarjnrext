@@ -168,8 +168,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const SCHOOL_ID  = 1;
     const BRANCH_ID  = 5; // Junior school
 
-    const BOARDS_API = 'proxy/boards-proxy';
-    const GRADES_API = 'proxy/selected-grades-proxy';
+   
+    const sitePrefix = window.location.pathname.match(/^\/dpsgomtinagarjnrext(?=\/|$)/i)?.[0] || '';
+    // Use the real PHP endpoints so this also works on local PHP servers
+    // that do not process .htaccess rewrite rules.
+    const BOARDS_API = `${sitePrefix}/proxy/boards-proxy.php`;
+    const GRADES_API = `${sitePrefix}/proxy/selected-grades-proxy.php`;
 
     // AbortController to cancel previous grade fetch
     let abortController = null;
@@ -410,7 +414,8 @@ grades.sort((a, b) => {
             };
 
             try {
-                const res = await fetch(`proxy/admission-proxy`, {
+                // Use the real PHP endpoint for local servers without rewrite support.
+                const res = await fetch(`proxy/admission-proxy.php`, {
                     method:  "POST",
                     headers: { "Content-Type": "application/json" },
                     body:    JSON.stringify(payload)

@@ -1,4 +1,31 @@
 <?php
+
+// Some local servers send extensionless URLs to index.php instead of
+// applying .htaccess. Dispatch those requests to their matching page file.
+$requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+$scriptDirectory = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+if ($scriptDirectory !== '' && $scriptDirectory !== '/' &&
+    strpos($requestPath, $scriptDirectory . '/') === 0) {
+    $requestPath = substr($requestPath, strlen($scriptDirectory));
+}
+
+$requestPath = trim($requestPath, '/');
+if ($requestPath !== '' && strpos($requestPath, '/') === false &&
+    !preg_match('/\.php$/i', $requestPath) && $requestPath !== 'index') {
+    $pageFile = __DIR__ . '/' . $requestPath . '.php';
+    $directoryIndex = __DIR__ . '/' . $requestPath . '/index.php';
+
+    if (is_file($pageFile)) {
+        require $pageFile;
+        exit;
+    }
+
+    if (is_file($directoryIndex)) {
+        require $directoryIndex;
+        exit;
+    }
+}
+
 include "includes/apis.php";
 // print_r($home_data['data']['sections'][0]['resolved_content']);  
 ?>

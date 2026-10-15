@@ -881,8 +881,9 @@ include "api.php";
     // Board & Grade API integration
     const SCHOOL_ID = 1;
     const BRANCH_ID = 5;  // Junior branch
-    const BOARDS_API = `https://dps.allenhouseschools.com/api/boards/${SCHOOL_ID}/${BRANCH_ID}`;
-    const GRADES_API = `https://dps.allenhouseschools.com/api/selected-grades/${SCHOOL_ID}/${BRANCH_ID}`;
+    const sitePrefix = window.location.pathname.match(/^\/dpsgomtinagarjnrext(?=\/|$)/i)?.[0] || '';
+    const BOARDS_API = `${sitePrefix}/proxy/boards-proxy.php`;
+    const GRADES_API = `${sitePrefix}/proxy/selected-grades-proxy.php`;
 
     let abortController = null;
 
@@ -928,7 +929,7 @@ include "api.php";
       gradeSelect.innerHTML = '<option value="" disabled selected>Loading grades...</option>';
 
       try {
-        const url = `${GRADES_API}/${boardId}`;
+        const url = `${GRADES_API}?board=${encodeURIComponent(boardId)}`;
         const res = await fetch(url, { signal });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const result = await res.json();
@@ -1087,7 +1088,7 @@ grades.sort((a, b) => {
         language_id: 1
       };
 
-      fetch("admission-proxy", {
+      fetch("admission-proxy.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload)
