@@ -5,6 +5,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <?php
 include_once "includes/apis.php";
 require_once "layouts/layout-function.php";
+
+// Keep internal links inside the project when it is served from a local
+// subdirectory (for example, /dpsgomtinagarjnrext/).
+$siteBasePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+if ($siteBasePath === '.') {
+    $siteBasePath = '';
+}
+
+if (!function_exists('dps_site_url')) {
+    function dps_site_url($path = '')
+    {
+        global $siteBasePath;
+
+        $path = trim((string) $path);
+        if ($path === '' || $path === '/') {
+            return ($siteBasePath ?: '') . '/';
+        }
+
+        if ($siteBasePath !== '' && (
+            $path === $siteBasePath ||
+            strpos($path, $siteBasePath . '/') === 0
+        )) {
+            return '/' . ltrim($path, '/');
+        }
+
+        return ($siteBasePath ?: '') . '/' . ltrim($path, '/');
+    }
+}
+
 $currentPage = basename($_SERVER['PHP_SELF'], '.php');
 // echo $currentPage;
 
@@ -333,7 +362,7 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
                 </a>
             </li>
             <li>
-                <a href="contact-us" class="gap-1 flex items-center text-white transition-all  whitespace-nowrap">
+                <a href="<?= htmlspecialchars(dps_site_url('contact-us'), ENT_QUOTES) ?>" class="gap-1 flex items-center text-white transition-all  whitespace-nowrap">
 
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -409,7 +438,7 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
                     </a>
                 </li>
                 <li>
-                    <a href="contact-us"
+                    <a href="<?= htmlspecialchars(dps_site_url('contact-us'), ENT_QUOTES) ?>"
                         class="gap-1 flex items-center text-white transition-all  whitespace-nowrap">
 
                         <svg width="14" height="14" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -473,10 +502,10 @@ function renderMenu($items, $isSub = false)
             // Leave external links untouched
             $fullUrl = $url;
         } elseif ($url === '' || $url === '/') {
-            $fullUrl = '/';
+            $fullUrl = dps_site_url('/');
         } else {
-            // Internal relative link
-            $fullUrl = '/' . ltrim($url, '/');
+            // Prefix internal links with the local project directory.
+            $fullUrl = dps_site_url($url);
         }
 
         echo '<li>';
@@ -513,13 +542,13 @@ function renderMenu($items, $isSub = false)
 <header>
     <nav>
         <div class="logo">
-            <a href="/"><img src="assets/images/logo2.png" class="w-44" alt=""></a>
+            <a href="<?= htmlspecialchars(dps_site_url('/'), ENT_QUOTES) ?>"><img src="assets/images/logo2.png" class="w-44" alt=""></a>
         </div>
         <label for="menubrop" class="bartoggle">≡</label>
         <div class="onMobileEffect" id="onMobileEffect" style="transform: translateX(-100%);">
             <input type="checkbox" id="menubrop">
             <div class="NavMenuLogo bg-white py-5 justify-between px-2">
-                <a href="/">
+                <a href="<?= htmlspecialchars(dps_site_url('/'), ENT_QUOTES) ?>">
                     <img src="assets/images/logo2.png" class="w-[200px]" alt="">
                 </a>
                 <button id="closeMenu">
