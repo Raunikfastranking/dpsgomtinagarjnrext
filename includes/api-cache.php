@@ -1,11 +1,10 @@
 <?php
 /**
- * File-based API response cache with stale-while-revalidate.
+ * File-based API response cache with a short refresh interval.
  *
  * - Fresh cache (< API_CACHE_TTL seconds): served instantly.
- * - Stale cache: still served instantly; a detached background process
- *   (refresh-cache.php) updates expired keys so no visitor ever waits
- *   on the remote API.
+ * - Stale cache: refreshed synchronously so CMS changes are visible on the
+ *   next request after the short TTL.
  * - Missing cache: fetched synchronously once, then cached.
  */
 
@@ -243,7 +242,7 @@ function api_fetch_cached(array $endpoints, int $ttl = API_CACHE_TTL): array
 {
     $result = [];
     $missing = [];
-    $hasStale = false;
+    $stale = [];
     $now = time();
 
     foreach ($endpoints as $key => $endpoint) {
@@ -254,23 +253,19 @@ function api_fetch_cached(array $endpoints, int $ttl = API_CACHE_TTL): array
         }
         $result[$key] = $entry['data'];
         if ($now - $entry['fetched_at'] >= $ttl) {
-            $hasStale = true;
+            $stale[$key] = $endpoint;
         }
     }
 
-    if ($missing) {
-        $fresh = api_fetch_raw($missing);
+    $toFetch = $missing + $stale;
+    if ($toFetch) {
+        $fresh = api_fetch_raw($toFetch);
         foreach ($fresh as $key => $data) {
-            $result[$key] = $data;
-            api_cache_set($key, $data);
-        }
-    }
-
-    if ($hasStale) {
-        if (PHP_SAPI === 'cli') {
-            api_refresh_stale($endpoints, $ttl); // inline when running from CLI
-        } else {
-            api_trigger_background_refresh();
+            // Keep the previous value if the API is temporarily unavailable.
+            if ($data !== null) {
+                $result[$key] = $data;
+                api_cache_set($key, $data);
+            }
         }
     }
 
