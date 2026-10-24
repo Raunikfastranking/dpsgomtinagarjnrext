@@ -786,15 +786,8 @@ if (!function_exists('cmsCambridgeRenderEnquiryForm')) {
                     </label>
                     <?php endif; ?>
                     <label>Grade*
-                        <select name="grade" id="agrade" required>
-                            <?php
-                            $gradeFile = $includesDir . '/grade-api.php';
-                            if (is_file($gradeFile)) {
-                                include $gradeFile;
-                            } else {
-                                echo '<option value="" disabled selected>Grades unavailable</option>';
-                            }
-                            ?>
+                        <select name="grade" id="agrade" required disabled>
+                            <option value="" disabled selected>Select Grade</option>
                         </select>
                         <span id="aclassError" class="cb-field-error hidden">Please select a class.</span>
                     </label>
