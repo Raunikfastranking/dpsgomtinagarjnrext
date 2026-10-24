@@ -288,8 +288,8 @@
         (function() {
             const SCHOOL_ID = 1;
             const BRANCH_ID = 5;
-            const BOARDS_API = 'proxy/boards-proxy';
-            const GRADES_API = 'proxy/selected-grades-proxy';
+            const BOARDS_API = 'proxy/boards-proxy.php';
+            const GRADES_API = 'proxy/selected-grades-proxy.php';
 
             let abortController = null;
 
@@ -507,7 +507,7 @@ grades.sort((a, b) => {
             };
 
             try {
-                const res = await fetch("proxy/admission-proxy", {
+                const res = await fetch("proxy/admission-proxy.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)

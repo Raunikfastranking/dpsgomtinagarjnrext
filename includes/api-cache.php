@@ -9,7 +9,7 @@
  */
 
 if (!defined('API_CACHE_TTL')) {
-    define('API_CACHE_TTL', 5); // seconds; CMS updates reflect within ~5-10s
+    define('API_CACHE_TTL', 10); // seconds; CMS updates reflect within ~10s
 }
 
 if (!defined('API_CACHE_DIR')) {
@@ -18,6 +18,10 @@ if (!defined('API_CACHE_DIR')) {
 
 if (!defined('API_REFRESH_LOCK')) {
     define('API_REFRESH_LOCK', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'refresh.lock');
+}
+
+if (!defined('API_REFRESH_QUEUE')) {
+    define('API_REFRESH_QUEUE', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR . 'refresh-queue.json');
 }
 
 if (!defined('API_REFRESH_LOCK_MAX_AGE')) {
@@ -203,7 +207,7 @@ function api_fetch_raw(array $endpoints, string $baseUrl = 'https://dps.allenhou
  * Spawn refresh-cache.php as a detached process. Guarded by a lock file
  * so only one refresh runs at a time.
  */
-function api_trigger_background_refresh(): void
+function api_trigger_background_refresh(array $endpoints = []): void
 {
     if (PHP_SAPI === 'cli') {
         return; // CLI callers refresh inline
@@ -221,8 +225,13 @@ function api_trigger_background_refresh(): void
         return; // cache dir not writable
     }
 
+    if ($endpoints) {
+        @file_put_contents(API_REFRESH_QUEUE, json_encode($endpoints), LOCK_EX);
+    }
+
     $script = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'refresh-cache.php';
     if (!is_file($script)) {
+        @unlink(API_REFRESH_LOCK);
         return;
     }
 
@@ -257,9 +266,10 @@ function api_fetch_cached(array $endpoints, int $ttl = API_CACHE_TTL): array
         }
     }
 
-    $toFetch = $missing + $stale;
-    if ($toFetch) {
-        $fresh = api_fetch_raw($toFetch);
+    // Missing data must be fetched before rendering. Stale data is served
+    // immediately and refreshed in the background so page loads stay fast.
+    if ($missing) {
+        $fresh = api_fetch_raw($missing);
         foreach ($fresh as $key => $data) {
             // Keep the previous value if the API is temporarily unavailable.
             if ($data !== null) {
@@ -267,6 +277,10 @@ function api_fetch_cached(array $endpoints, int $ttl = API_CACHE_TTL): array
                 api_cache_set($key, $data);
             }
         }
+    }
+
+    if ($stale) {
+        api_trigger_background_refresh($stale);
     }
 
     return $result;

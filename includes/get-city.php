@@ -36,13 +36,26 @@ if ($cached !== null) {
 }
 
 // Handle both possible structures: wrapped {status, count, data: [...]} or direct array
+$rows = [];
 if (is_array($json) && isset($json['status']) && $json['status'] === 'success') {
-    return $json['data'] ?? [];           // wrapped version
+    $rows = $json['data'] ?? [];          // wrapped version
+} elseif (is_array($json)) {
+    $rows = $json;                        // direct array version
 }
 
-if (is_array($json)) {
-    return $json;                         // direct array version
+if (($cmsGetCityMode ?? '') === 'array') {
+    // Cambridge enquiry form expects a flat list of city names.
+    $names = [];
+    foreach ($rows as $row) {
+        $name = is_array($row) ? trim((string) ($row['name'] ?? '')) : trim((string) $row);
+        if ($name !== '') {
+            $names[strtolower($name)] = $name;
+        }
+    }
+    $names = array_values($names);
+    sort($names, SORT_NATURAL | SORT_FLAG_CASE);
+    return $names;
 }
 
-return [];
+return $rows;
 ?>

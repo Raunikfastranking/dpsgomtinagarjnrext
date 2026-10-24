@@ -334,7 +334,7 @@ $totalSteps = count($processItems);
 
         async function loadBoards() {
             try {
-                const res = await fetch('proxy/boards-proxy');
+                const res = await fetch('proxy/boards-proxy.php');
                 const result = await res.json();
                 const boards = result.data || result;
                 boardSelect.innerHTML = '<option value="" disabled selected>Select Board</option>';
@@ -351,7 +351,7 @@ $totalSteps = count($processItems);
             gradeSelect.disabled = true;
             gradeSelect.innerHTML = '<option value="" disabled selected>Loading...</option>';
             try {
-                const res = await fetch(`proxy/selected-grades-proxy?board=${encodeURIComponent(this.value)}`);
+                const res = await fetch(`proxy/selected-grades-proxy.php?board=${encodeURIComponent(this.value)}`);
                 const result = await res.json();
                 let grades = result.data || result;
 
@@ -413,7 +413,7 @@ $totalSteps = count($processItems);
             };
 
             try {
-                const response = await fetch("proxy/admission-proxy", {
+                const response = await fetch("proxy/admission-proxy.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload)
