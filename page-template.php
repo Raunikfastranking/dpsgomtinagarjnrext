@@ -281,7 +281,7 @@ $heading = $pageData2['data']['sections'][0]['content_heading'] ?? '';
                         $gallerySubtypeName = $gallery['gallery_sub_type']['sub_type_name'] ?? $gallerySubtype;
                         ?>
                         <div class="w-[100%] mx-auto bg-white border border-gray-200 rounded-lg shadow hover:shadow-[rgba(0,0,0,0.15)_0px_15px_25px,rgba(0,0,0,0.05)_0px_5px_10px] transition-shadow duration-300">
-                            <a href="gallery-detail.php?id=<?= htmlspecialchars($galleryId) ?>" class="block">
+                            <a href="gallery-detail?id=<?= htmlspecialchars($galleryId) ?>" class="block">
                                 <?php if ($isPdfGallery): ?>
                                     <div class="pdf-preview-card">
                                         <svg class="w-16 h-20 text-red-600 mb-2" fill="currentColor" viewBox="0 0 24 24">
@@ -326,7 +326,7 @@ $heading = $pageData2['data']['sections'][0]['content_heading'] ?? '';
                                         </div>
                                     </div>
                                 </div>
-                                <a href="gallery-detail.php?id=<?= htmlspecialchars($galleryId) ?>">
+                                <a href="gallery-detail?id=<?= htmlspecialchars($galleryId) ?>">
                                     <button class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border border-gray text-blue-main hover:text-white hover:bg-[#003618] flex gap-2 items-center justify-center mt-5">
                                         View More
                                         <svg class="w-[14px] h-[10px] fill-[#223B71] group-hover:fill-white" width="8" height="9" viewBox="0 0 8 9" xmlns="http://www.w3.org/2000/svg">

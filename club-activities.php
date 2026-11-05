@@ -46,7 +46,7 @@
             <div class="flex m-5" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
-                        <a href="index.php"
+                        <a href="index"
                             class="inline-flex items-center sm:text-sm text-xs font-medium text-blue-main">
                             Home
                         </a>
@@ -68,7 +68,7 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                            <a href="club-activities.php"
+                            <a href="club-activities"
                                 class="ms-1 sm:text-sm text-xs font-medium text-blue-main">Club Activities</a>
                         </div>
                     </li>

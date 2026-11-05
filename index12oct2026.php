@@ -586,7 +586,7 @@ include "includes/apis.php";
                                                 raised hand , there is a story of someone daring to do more , learn more
                                                 and most importantly to be a little more. </p>
 
-                                            <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence.php"
+                                            <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -635,7 +635,7 @@ include "includes/apis.php";
                                             <p class="mt-3 text-white">In the world of dance and music , the excellence
                                                 is in the flick of a wrist, the tilt of head ,
                                                 the strike of a drum , the hum in the violin and the serene vocal.</p>
-                                            <button class="w-[100%]"><a href="excellence-in-spotlight.php"
+                                            <button class="w-[100%]"><a href="excellence-in-spotlight"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -682,7 +682,7 @@ include "includes/apis.php";
                                                     Excellence</span>
                                             </h2>
                                             <p class="mt-3 text-white">Excellence is a journey that begins when students choose growth over comfort, effort over excuses, and progress over perfection.</p>
-                                            <button class="w-[100%]"><a href="embark-on-journey.php"
+                                            <button class="w-[100%]"><a href="embark-on-journey"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
