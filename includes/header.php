@@ -172,11 +172,11 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
     top: 20%;">
     Form submitted successfully!
 </div>
-<div id="popupForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center hidden z-[9998] overflow-y-auto pt-8 pb-8">
+<div id="popupForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9998] p-3">
     <!-- Add padding-top/bottom to give space at edges on small screens -->
 
-    <div class="bg-white p-6 sm:p-4 rounded-2xl shadow-2xl w-full max-w-md sm:max-w-2xl mx-4 relative max-h-[90vh] overflow-y-auto sm:max-h-none sm:overflow-visible">
-        <!-- 
+    <div class="dps-enquiry-modal">
+        <!--
             KEY CHANGES HERE:
             max-h-[90vh]     → limits height to ~90% of viewport
             overflow-y-auto  → enables scrolling inside the white box when content is too tall
@@ -184,80 +184,195 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
         -->
 
         <!-- Make close button bigger / easier to tap on mobile -->
-        <button id="closePopup" class="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-3xl font-bold leading-none z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="button" id="closePopup" aria-label="Close" class="absolute top-[6px] right-[10px] leading-none z-20 focus:outline-none">
             ×
         </button>
 
-        <h2 class="text-2xl font-semibold mb-3">Enquiry Form</h2>
+        <h2 class="text-[20px] font-bold text-[#111] mb-2 mr-7">Enquiry Form</h2>
 
         <style>
-            /* ExtraaEdge enquiry widget — two columns on desktop, stacked on mobile */
-            #ee-form-popup .ee-form-widget .ee-form-body .ee-row {
-                margin-bottom: 8px;
+            /* Modal box — sized like the dpsindiranagar.com enquiry popup */
+            #popupForm .dps-enquiry-modal {
+                width: min(480px, calc(100vw - 24px));
+                max-height: 90vh;
+                overflow-x: hidden;
+                overflow-y: auto;
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+                padding: 20px 24px 16px;
+                position: relative;
+                scrollbar-width: none;
             }
-            @media (max-width: 639px) {
-                #ee-form-popup .ee-form-widget .ee-form-body {
-                    display: block !important;
-                }
-                #ee-form-popup .ee-form-widget .ee-form-body .ee-row {
-                    width: 100% !important;
-                    margin-right: 0 !important;
-                    margin-left: 0 !important;
-                }
+            #popupForm .dps-enquiry-modal::-webkit-scrollbar {
+                display: none;
             }
-            #ee-form-popup .ee-form-widget input:not([type=checkbox]):not([type=radio]):not([type=search]):not([type=tel]),
-            #ee-form-popup .ee-form-widget select {
-                height: 38px !important;
-                padding: 6px 12px !important;
+            #popupForm #closePopup {
+                font-size: 26px;
+                color: #666;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
             }
-            #ee-form-popup .ee-form-widget .iti input[type=tel] {
-                height: 38px !important;
-                padding-top: 6px !important;
-                padding-bottom: 6px !important;
+            #popupForm #closePopup:hover {
+                color: #c00;
             }
-            #ee-form-popup .ee-form-widget .iti--separate-dial-code input[type=tel],
-            #ee-form-popup .ee-form-widget .iti--separate-dial-code input[type=text] {
-                padding-left: 96px;
+
+            /* ExtraaEdge enquiry widget — colors/text same as reference site */
+            #ee-form-popup,
+            #ee-form-popup .ee-form-widget {
+                --ee-primary-color: #003618;
+                --ee-success-color: #003618;
+                --ee-border-color: #d1d5db;
+                --ee-main-txt-color: #111;
+                background: #fff !important;
+                width: 100% !important;
             }
-            #ee-form-popup .ee-form-widget .select2-container .select2-selection--single {
-                height: 38px !important;
-                padding: 6px 12px !important;
-                border: 1px solid var(--ee-border-color) !important;
-                border-radius: 4px;
-                display: flex;
-                align-items: center;
-            }
-            #ee-form-popup .ee-form-widget .select2-selection--single .select2-selection__rendered {
-                line-height: normal !important;
+            #ee-form-popup .ee-form-widget .ee-container {
                 padding: 0 !important;
-            }
-            #ee-form-popup .ee-form-widget .select2-selection--single .select2-selection__arrow {
-                height: 36px !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
             }
             #ee-form-popup .ee-form-widget .ee-form-heading {
                 display: none;
             }
-            #ee-form-popup .ee-form-widget .ee-container {
-                padding: 0;
-            }
             #ee-form-popup .ee-form-widget .ee-form-widget-form {
                 padding: 0;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body > .ee-row {
+                margin: 0 0 6px 0 !important;
+                width: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row:not(.full-width) {
+                width: calc(50% - 4px) !important;
+                margin: 0 !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row.full-width {
+                width: 100% !important;
+                margin: 0 0 6px 0 !important;
+            }
+            #ee-form-popup .ee-form-widget input:not([type=checkbox]):not([type=radio]):not([type=search]):not([type=tel]),
+            #ee-form-popup .ee-form-widget select,
+            #ee-form-popup .ee-form-widget textarea,
+            #ee-form-popup .ee-form-widget .select2-container--default .select2-selection--single {
+                min-height: 40px !important;
+                height: 40px !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 6px !important;
+                padding: 8px 12px !important;
+                font-size: 14px !important;
+                background: #fff !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-container {
+                width: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-container--default .select2-selection--single .select2-selection__rendered {
+                line-height: 38px !important;
+                padding-left: 0 !important;
+                color: #6b7280 !important;
+                display: flex !important;
+                align-items: center !important;
+                height: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-selection--single .select2-selection__arrow {
+                height: 38px !important;
+            }
+            #ee-form-popup .ee-form-widget .inline-inputs {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+            }
+            #ee-form-popup .ee-form-widget .countryCode-input + input {
+                width: calc(100% - 70px) !important;
+                flex: 1 1 auto !important;
+            }
+            #ee-form-popup .ee-form-widget .iti {
+                width: 100% !important;
+                display: block !important;
+                position: relative !important;
+            }
+            #ee-form-popup .ee-form-widget .iti input[type=tel],
+            #ee-form-popup .ee-form-widget .iti input[type=text],
+            #ee-form-popup .ee-form-widget .iti--separate-dial-code input,
+            #ee-form-popup .ee-form-widget .iti--allow-dropdown input {
+                width: 100% !important;
+                min-height: 40px !important;
+                height: 40px !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 6px !important;
+                font-size: 14px !important;
+                background: #fff !important;
+                box-sizing: border-box !important;
+                padding-top: 8px !important;
+                padding-bottom: 8px !important;
+                padding-right: 10px !important;
+                padding-left: 96px !important;
+                margin: 0 !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__flag-container {
+                left: 0 !important;
+                right: auto !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__selected-flag {
+                height: 100% !important;
+                padding: 0 8px !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__selected-dial-code {
+                margin-left: 4px !important;
+                font-size: 13px !important;
+                color: #333 !important;
+            }
+            #ee-form-popup .ee-form-widget label:not([for]) {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body .col-25 > label {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body .col-25:empty {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-footer {
+                margin-top: 8px !important;
             }
             #ee-form-popup .ee-form-widget .btnContainer {
                 display: block;
             }
             #ee-form-popup .ee-form-widget .btn.btn-submit {
-                width: 100%;
-                padding: 10px;
-                font-size: 16px;
-                font-weight: 600;
-                border-radius: 4px;
-                background-color: #005224 !important;
-                border-color: #005224 !important;
+                width: 100% !important;
+                display: block !important;
+                background: #003618 !important;
+                border: 1px solid #003618 !important;
+                color: #fff !important;
+                border-radius: 9999px !important;
+                padding: 10px 16px !important;
+                font-size: 15px !important;
+                font-weight: 600 !important;
+                min-height: 44px;
             }
             #ee-form-popup .ee-form-widget .btn.btn-submit:hover {
-                background-color: #003618 !important;
-                border-color: #003618 !important;
+                background: #005224 !important;
+                border-color: #005224 !important;
+                color: #fff !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-instruction,
+            #ee-form-popup .ee-form-widget small,
+            #ee-form-popup .ee-form-widget .consent-text,
+            #ee-form-popup .ee-form-widget label {
+                font-size: 10px !important;
+                font-weight: 400 !important;
+                color: #6b7280 !important;
+                line-height: 1.3 !important;
             }
             /* Widget dropdowns must sit above the popup overlay (z-9998) */
             .select2-dropdown {
@@ -272,6 +387,21 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
             }
             .ee-form-widget #overlay {
                 z-index: 10015 !important;
+            }
+            @media (max-width: 480px) {
+                #popupForm .dps-enquiry-modal {
+                    width: calc(100vw - 16px);
+                    max-height: 82vh;
+                    padding: 12px 12px 10px;
+                    border-radius: 12px;
+                }
+                #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row:not(.full-width) {
+                    width: 100% !important;
+                }
+                #ee-form-popup .ee-form-widget .iti input[type=tel],
+                #ee-form-popup .ee-form-widget .iti--separate-dial-code input {
+                    padding-left: 90px !important;
+                }
             }
         </style>
         <div id="ee-form-popup"></div>
