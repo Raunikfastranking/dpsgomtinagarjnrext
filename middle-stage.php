@@ -29,7 +29,7 @@
         <div class="flex m-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="index.php" class="inline-flex items-center text-sm font-medium text-blue-main">
+                    <a href="index" class="inline-flex items-center text-sm font-medium text-blue-main">
                         Home
                     </a>
                 </li>
@@ -56,7 +56,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-blue-main mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
                         </svg>
-                        <a href="preparatory-stage.php" class="ms-1 text-sm font-medium text-blue-main"> Preparatory </a>
+                        <a href="preparatory-stage" class="ms-1 text-sm font-medium text-blue-main"> Preparatory </a>
                     </div>
                 </li>
                 <li>
@@ -64,7 +64,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-blue-main mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
                         </svg>
-                        <a href="middle-stage.php" class="ms-1 text-sm font-medium text-blue-main"> Middle Stage</a>
+                        <a href="middle-stage" class="ms-1 text-sm font-medium text-blue-main"> Middle Stage</a>
                     </div>
                 </li>
             </ol>
