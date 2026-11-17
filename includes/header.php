@@ -455,6 +455,27 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
         if (!popupEl.classList.contains('hidden')) loadWidget();
     });
     mo.observe(popupEl, { attributes: true, attributeFilter: ['class'] });
+
+    // Close the enquiry popup once the widget's thank-you modal appears.
+    // The widget renders its feedback modal (.ee-form-widget-feedback) inside a
+    // .jquery-modal blocker appended to <body>; OTP modals use
+    // .ee-form-widget-enter-otp and must not trigger this.
+    new MutationObserver(function (mutations) {
+        if (popupEl.classList.contains('hidden')) return;
+        for (var i = 0; i < mutations.length; i++) {
+            var nodes = mutations[i].addedNodes;
+            for (var j = 0; j < nodes.length; j++) {
+                var n = nodes[j];
+                if (n.nodeType !== 1) continue;
+                var feedback = (n.matches && n.matches('.ee-form-widget-feedback')) ? n
+                    : (n.querySelector ? n.querySelector('.ee-form-widget-feedback') : null);
+                if (feedback && /thank/i.test(feedback.textContent || '')) {
+                    popupEl.classList.add('hidden');
+                    return;
+                }
+            }
+        }
+    }).observe(document.body, { childList: true, subtree: true });
 })();
 </script>
 
