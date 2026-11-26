@@ -44,7 +44,7 @@ renderDynamicSections($pageData, $api_url);
 
     <div class="sm:mt-3 sm:order-1 order-1 mt-8 ">
         <div>
-            <a href="index.php">
+            <a href="index">
                 <img src="<?= $footer_layout_meta['footer_logo_url'] ?? "" ?>" alt="" class="w-[236px] sm:w-[200px]">
             </a>
         </div>

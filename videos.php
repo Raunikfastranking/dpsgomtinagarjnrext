@@ -118,7 +118,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -168,7 +168,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -217,7 +217,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -266,7 +266,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -314,7 +314,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -363,7 +363,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -418,7 +418,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -473,7 +473,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -522,7 +522,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -571,7 +571,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                         <button
                                                             class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                             View More
@@ -626,7 +626,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                     <button
                                                         class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                         View More
@@ -673,7 +673,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <a href="gallery.php">
+                                                    <a href="gallery">
                                                     <button
                                                         class="group py-1 px-4 sm:px-6 rounded-[10px] w-full border-[1px] border-gray text-blue-main hover:text-white hover:bg-[#005224] flex gap-2 items-center justify-center mt-5">
                                                         View More

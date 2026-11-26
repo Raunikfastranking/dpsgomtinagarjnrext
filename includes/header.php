@@ -172,11 +172,11 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
     top: 20%;">
     Form submitted successfully!
 </div>
-<div id="popupForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center hidden z-[9998] overflow-y-auto pt-8 pb-8">
+<div id="popupForm" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-[9998] p-3">
     <!-- Add padding-top/bottom to give space at edges on small screens -->
 
-    <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md mx-4 relative max-h-[90vh] overflow-y-auto">
-        <!-- 
+    <div class="dps-enquiry-modal">
+        <!--
             KEY CHANGES HERE:
             max-h-[90vh]     → limits height to ~90% of viewport
             overflow-y-auto  → enables scrolling inside the white box when content is too tall
@@ -184,132 +184,300 @@ $pageData = $pageDataMap[$currentPage] ?? null; // null if page not found
         -->
 
         <!-- Make close button bigger / easier to tap on mobile -->
-        <button id="closePopup" class="absolute top-3 right-3 text-gray-600 hover:text-red-600 text-3xl font-bold leading-none z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="button" id="closePopup" aria-label="Close" class="absolute top-[6px] right-[10px] leading-none z-20 focus:outline-none">
             ×
         </button>
 
-        <h2 class="text-2xl font-semibold mb-5">Enquiry Form</h2>
+        <h2 class="text-[20px] font-bold text-[#111] mb-2 mr-7">Enquiry Form</h2>
 
-        <form class="space-y-5" id="enquiryForm" action="" method="POST">
-           <div>
-    <select name="class-selection" required id="esession"
-        class="w-full border border-gray-300 p-2 rounded-md text-gray-500">
-        <option value="" disabled selected>Enquiry For Session</option>
-        <?php
-        $sessions = include "includes/session-api.php";
-        if (is_array($sessions)):
-        foreach ($sessions as $item): 
-        ?>
-            <option value="<?= htmlspecialchars($item['session'] ?? '') ?>">
-                <?= htmlspecialchars($item['session'] ?? 'Unknown Session') ?>
-            </option>
-        <?php endforeach; endif; ?>
-    </select>
-</div>
-            <div>
-                <select name="board" required id="eboard"
-                    class="w-full border border-gray-300 p-2 rounded-md text-gray-500">
-                    <option value="" disabled selected>Loading boards...</option>
-                </select>
-                <span id="boardError" class="text-red-500 text-sm hidden">Please select a board.</span>
-            </div>
-            <div>
-                <select name="grade" required id="egrade" disabled
-                    class="w-full border border-gray-300 p-2 rounded-md text-gray-500 disabled:bg-gray-100 disabled:cursor-not-allowed">
-                    <option value="" disabled selected>Select Grade</option>
-                </select>
-                <span id="classError" class="text-red-500 text-sm hidden">Please select a class.</span>
-            </div>
+        <style>
+            /* Modal box — sized like the dpsindiranagar.com enquiry popup */
+            #popupForm .dps-enquiry-modal {
+                width: min(480px, calc(100vw - 24px));
+                max-height: 90vh;
+                overflow-x: hidden;
+                overflow-y: auto;
+                background: #fff;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+                padding: 20px 24px 16px;
+                position: relative;
+                scrollbar-width: none;
+            }
+            #popupForm .dps-enquiry-modal::-webkit-scrollbar {
+                display: none;
+            }
+            #popupForm #closePopup {
+                font-size: 26px;
+                color: #666;
+                background: transparent;
+                border: 0;
+                cursor: pointer;
+            }
+            #popupForm #closePopup:hover {
+                color: #c00;
+            }
 
-            <div>
-                <input type="text" name="student-name" id="estudent_name"  placeholder="Student Name"
-                    class="w-full border border-gray-300 p-2 rounded-md" required maxlength="50">
-                <span id="student-error" class="text-red-500 text-sm mt-1 hidden">Only letters and spaces
-                    allowed.</span>
-            </div>
-
-            <div>
-                <input type="text" name="parent-name" id="eparent_name"  placeholder="Parents Name"
-                    class="w-full border border-gray-300 p-2 rounded-md" required maxlength="50">
-                <span id="parent-error" class="text-red-500 text-sm mt-1 hidden">Only letters and spaces allowed.</span>
-            </div>
-
-            <div>
-                <input type="text" name="mobile" id="emobile" placeholder="Mobile No."
-                    class="w-full border border-gray-300 p-2 rounded-md" required maxlength="10">
-                <span id="mobile-error" class="text-red-500 text-sm mt-1 hidden">Please enter valid phone number</span>
-            </div>
-
-            <div>
-                <input type="text" name="email" id="eemail" maxlength="50" placeholder="E-mail"
-                    class="w-full border border-gray-300 p-2 rounded-md" required>
-                <span id="email-error" class="text-red-500 text-sm mt-1 hidden">Please enter a valid email
-                    address.</span>
-            </div>
-
-            <!-- <div>
-                <input type="text" name="city" id="ecity" placeholder="City"
-                    class="w-full border border-gray-300 p-2 rounded-md"
-                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')" required>
-            </div> -->
-
-            <div class="mt-4 relative customSelect">
-               <select id="ecity" name="ecity" class="hidden">
-    <option value="">Select City</option>
-    <?php
-    $cities = include 'get-city.php';
-    ?>
-    <?php if (!empty($cities)): ?>
-        <?php foreach ($cities as $city): ?>
-            <?php if (empty($city['name'])) continue; ?>
-            <option value="<?= htmlspecialchars($city['name'], ENT_QUOTES, 'UTF-8') ?>">
-                <?= htmlspecialchars($city['name'], ENT_QUOTES, 'UTF-8') ?>
-            </option>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <option value="">No cities available</option>
-    <?php endif; ?>
-</select>
-
-
-                <!-- Fake dropdown display -->
-                <div class="border border-gray-300 p-[11px] rounded-md bg-white cursor-pointer flex justify-between items-center">
-                    <span class="selected-text text-[#808080cc]">Select City</span>
-                    <span>▼</span>
-                </div>
-
-                <!-- Dropdown options -->
-                <div class="absolute mt-1 border border-gray-300 rounded-md bg-white shadow-md hidden z-50 w-full">
-                    <input type="text" placeholder="Search..."
-                        class="w-full p-2 border-b border-gray-300 outline-none">
-                    <ul class="max-h-48 overflow-y-auto"></ul>
-                </div>
-
-            </div>
-
-            <!-- Pincode -->
-            <div>
-                <input type="text" name="pincode" id="epincode" placeholder="Enter your Pincode"
-                    class="w-full border border-gray-300 p-2 rounded-md" maxlength="6"
-                    oninput="this.value=this.value.replace(/\D/g,'')" required>
-                <span id="pincode-error" class="text-red-500 text-sm hidden">Please enter a valid Pincode.</span>
-            </div>
-
-
-            <div class="flex items-start gap-2">
-                <input type="checkbox" id="popupCheckbox" required />
-                <label for="popupCheckbox" class="text-sm">I agree to <a href="termsandconditions"
-                        class="text-blue-600 underline">Terms
-                        and Conditions</a>.</label>
-                <span id="checkboxError" class="text-red-500 text-sm hidden">You must agree to the terms and
-                    conditions.</span>
-            </div>
-            <input type="hidden" name="source" id="source" >
-            <button type="submit" id="submitBtn"
-                class="w-full py-2 bg-blue-main text-white rounded-md hover:[#FED72B] transition">Submit</button>
-        </form>
+            /* ExtraaEdge enquiry widget — colors/text same as reference site */
+            #ee-form-popup,
+            #ee-form-popup .ee-form-widget {
+                --ee-primary-color: #003618;
+                --ee-success-color: #003618;
+                --ee-border-color: #d1d5db;
+                --ee-main-txt-color: #111;
+                background: #fff !important;
+                width: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-container {
+                padding: 0 !important;
+                border-radius: 0 !important;
+                background: transparent !important;
+                box-shadow: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-heading {
+                display: none;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-widget-form {
+                padding: 0;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body > .ee-row {
+                margin: 0 0 6px 0 !important;
+                width: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row:not(.full-width) {
+                width: calc(50% - 4px) !important;
+                margin: 0 !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row.full-width {
+                width: 100% !important;
+                margin: 0 0 6px 0 !important;
+            }
+            #ee-form-popup .ee-form-widget input:not([type=checkbox]):not([type=radio]):not([type=search]):not([type=tel]),
+            #ee-form-popup .ee-form-widget select,
+            #ee-form-popup .ee-form-widget textarea,
+            #ee-form-popup .ee-form-widget .select2-container--default .select2-selection--single {
+                min-height: 40px !important;
+                height: 40px !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 6px !important;
+                padding: 8px 12px !important;
+                font-size: 14px !important;
+                background: #fff !important;
+                width: 100% !important;
+                box-sizing: border-box !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-container {
+                width: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-container--default .select2-selection--single .select2-selection__rendered {
+                line-height: 38px !important;
+                padding-left: 0 !important;
+                color: #6b7280 !important;
+                display: flex !important;
+                align-items: center !important;
+                height: 100% !important;
+            }
+            #ee-form-popup .ee-form-widget .select2-selection--single .select2-selection__arrow {
+                height: 38px !important;
+            }
+            #ee-form-popup .ee-form-widget .inline-inputs {
+                display: flex !important;
+                align-items: center;
+                gap: 8px;
+                width: 100%;
+            }
+            #ee-form-popup .ee-form-widget .countryCode-input + input {
+                width: calc(100% - 70px) !important;
+                flex: 1 1 auto !important;
+            }
+            #ee-form-popup .ee-form-widget .iti {
+                width: 100% !important;
+                display: block !important;
+                position: relative !important;
+            }
+            #ee-form-popup .ee-form-widget .iti input[type=tel],
+            #ee-form-popup .ee-form-widget .iti input[type=text],
+            #ee-form-popup .ee-form-widget .iti--separate-dial-code input,
+            #ee-form-popup .ee-form-widget .iti--allow-dropdown input {
+                width: 100% !important;
+                min-height: 40px !important;
+                height: 40px !important;
+                border: 1px solid #d1d5db !important;
+                border-radius: 6px !important;
+                font-size: 14px !important;
+                background: #fff !important;
+                box-sizing: border-box !important;
+                padding-top: 8px !important;
+                padding-bottom: 8px !important;
+                padding-right: 10px !important;
+                padding-left: 96px !important;
+                margin: 0 !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__flag-container {
+                left: 0 !important;
+                right: auto !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__selected-flag {
+                height: 100% !important;
+                padding: 0 8px !important;
+                display: flex !important;
+                align-items: center !important;
+            }
+            #ee-form-popup .ee-form-widget .iti__selected-dial-code {
+                margin-left: 4px !important;
+                font-size: 13px !important;
+                color: #333 !important;
+            }
+            #ee-form-popup .ee-form-widget label:not([for]) {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body .col-25 > label {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-body .col-25:empty {
+                display: none !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-footer {
+                margin-top: 8px !important;
+            }
+            #ee-form-popup .ee-form-widget .btnContainer {
+                display: block;
+            }
+            #ee-form-popup .ee-form-widget .btn.btn-submit {
+                width: 100% !important;
+                display: block !important;
+                background: #003618 !important;
+                border: 1px solid #003618 !important;
+                color: #fff !important;
+                border-radius: 9999px !important;
+                padding: 10px 16px !important;
+                font-size: 15px !important;
+                font-weight: 600 !important;
+                min-height: 44px;
+            }
+            #ee-form-popup .ee-form-widget .btn.btn-submit:hover {
+                background: #005224 !important;
+                border-color: #005224 !important;
+                color: #fff !important;
+            }
+            #ee-form-popup .ee-form-widget .ee-form-instruction,
+            #ee-form-popup .ee-form-widget small,
+            #ee-form-popup .ee-form-widget .consent-text,
+            #ee-form-popup .ee-form-widget label {
+                font-size: 10px !important;
+                font-weight: 400 !important;
+                color: #6b7280 !important;
+                line-height: 1.3 !important;
+            }
+            /* Widget dropdowns must sit above the popup overlay (z-9998) */
+            .select2-dropdown {
+                z-index: 10010 !important;
+            }
+            .iti--container {
+                z-index: 10010 !important;
+            }
+            /* Widget thank-you / OTP modals above the enquiry popup */
+            .jquery-modal {
+                z-index: 10020 !important;
+            }
+            .ee-form-widget #overlay {
+                z-index: 10015 !important;
+            }
+            @media (max-width: 480px) {
+                #popupForm .dps-enquiry-modal {
+                    width: calc(100vw - 16px);
+                    max-height: 82vh;
+                    padding: 12px 12px 10px;
+                    border-radius: 12px;
+                }
+                #ee-form-popup .ee-form-widget .ee-form-body.TWO_COLUMNS > .ee-row:not(.full-width) {
+                    width: 100% !important;
+                }
+                #ee-form-popup .ee-form-widget .iti input[type=tel],
+                #ee-form-popup .ee-form-widget .iti--separate-dial-code input {
+                    padding-left: 90px !important;
+                }
+            }
+        </style>
+        <div id="ee-form-popup"></div>
     </div>
 </div>
+
+<script>
+// ExtraaEdge enquiry widget — lazily initialized on first popup open
+(function () {
+    var popupEl = document.getElementById('popupForm');
+    if (!popupEl) return;
+    var inited = false;
+
+    function loadWidget() {
+        // Page already has the inline enquiry widget — a second form-18
+        // instance would create duplicate field IDs and break the widget,
+        // so jump to the inline form instead of opening the popup.
+        var inlineForm = document.getElementById('ee-form-18');
+        if (inlineForm) {
+            popupEl.classList.add('hidden');
+            var step2 = document.querySelector('[data-tab="step-2"]');
+            if (step2) step2.click();
+            setTimeout(function () {
+                inlineForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+            return;
+        }
+        if (inited) return;
+        inited = true;
+
+        window.ee_form_widget_baseurl = "https://eeconfigstaticfiles.blob.core.windows.net/staticfiles/ee-form-widget/";
+        if (!document.getElementById("__formWidgetCss")) {
+            var e = document.createElement("link");
+            e.id = "__formWidgetCss";
+            e.rel = "stylesheet";
+            e.href = window.ee_form_widget_baseurl + "css/stylesheet.min.css";
+            e.type = "text/css";
+            document.getElementsByTagName("head")[0].appendChild(e);
+        }
+        var t = document.createElement("script");
+        t.type = "text/javascript";
+        t.onload = async function () {
+            window._eeFormWidgetPopup = new eeFormWidget;
+            await window._eeFormWidgetPopup.init("superhouseeducation", "form-18", "ee-form-popup");
+        };
+        t.src = window.ee_form_widget_baseurl + "js/eeFormWidget.min.js";
+        document.getElementsByTagName("head")[0].appendChild(t);
+    }
+
+    var mo = new MutationObserver(function () {
+        if (!popupEl.classList.contains('hidden')) loadWidget();
+    });
+    mo.observe(popupEl, { attributes: true, attributeFilter: ['class'] });
+
+    // Close the enquiry popup once the widget's thank-you modal appears.
+    // The widget renders its feedback modal (.ee-form-widget-feedback) inside a
+    // .jquery-modal blocker appended to <body>; OTP modals use
+    // .ee-form-widget-enter-otp and must not trigger this.
+    new MutationObserver(function (mutations) {
+        if (popupEl.classList.contains('hidden')) return;
+        for (var i = 0; i < mutations.length; i++) {
+            var nodes = mutations[i].addedNodes;
+            for (var j = 0; j < nodes.length; j++) {
+                var n = nodes[j];
+                if (n.nodeType !== 1) continue;
+                var feedback = (n.matches && n.matches('.ee-form-widget-feedback')) ? n
+                    : (n.querySelector ? n.querySelector('.ee-form-widget-feedback') : null);
+                if (feedback && /thank/i.test(feedback.textContent || '')) {
+                    popupEl.classList.add('hidden');
+                    return;
+                }
+            }
+        }
+    }).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
 
 <div class="bg-blue-main p-2 px-10 lg:flex hidden justify-between items-center text-[12px]">
 

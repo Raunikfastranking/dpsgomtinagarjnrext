@@ -1,40 +1,68 @@
 <?php
-// Dev router for PHP built-in server — mirrors .htaccess rewrite rules.
+// Router for PHP built-in server — mirrors the IIS rewrite rules in web.config
 // Run: php -S localhost:8000 router.php
 
-$uri  = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$path = trim($uri, '/');
+$docroot = __DIR__;
+$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$path = ltrim(rawurldecode($uri), '/');
 
-// Serve real files/dirs directly (assets, images, css, js, .php files)
-if ($path !== '' && file_exists(__DIR__ . '/' . $path)) {
+$staticExt = '#\.(jpg|jpeg|png|gif|css|js|pdf|svg|ico|webp|apk|zip|rar|txt|xml|json|mp4|webm|ogg|map|woff|woff2|ttf|eot)$#i';
+
+// Serve real files (incl. .php) as-is
+if ($path !== '' && is_file($docroot . '/' . $path)) {
     return false;
 }
 
-// /home → index.php
-if (preg_match('#^home/?$#', $path)) {
-    require __DIR__ . '/index.php';
+// Strip trailing slash on non-directory URLs
+if ($path !== '' && substr($uri, -1) === '/' && !is_dir($docroot . '/' . rtrim($path, '/'))) {
+    header('Location: ' . rtrim($uri, '/'), true, 301);
+    exit;
+}
+
+// /proxy/name -> /proxy/name.php
+if (preg_match('#^proxy/([A-Za-z0-9_-]+)/?$#i', $path, $m)) {
+    $f = $docroot . '/proxy/' . $m[1] . '.php';
+    if (is_file($f)) { require $f; return true; }
+}
+
+// Subfolder directory index
+$dir = rtrim($path, '/');
+if ($dir !== '' && is_file($docroot . '/' . $dir . '/index.php')) {
+    require $docroot . '/' . $dir . '/index.php';
     return true;
 }
 
-// /blog/<slug> → detail.php?slug=<slug>
-if (preg_match('#^blog/([A-Za-z0-9-]+)/?$#', $path, $m)) {
+// /home and /index -> index.php
+if (preg_match('#^(home|index)/?$#i', $path)) {
+    require $docroot . '/index.php';
+    return true;
+}
+
+// /blog/slug -> detail.php?slug=
+if (preg_match('#^blog/([A-Za-z0-9-]+)/?$#i', $path, $m)) {
     $_GET['slug'] = $m[1];
-    require __DIR__ . '/detail.php';
+    require $docroot . '/detail.php';
     return true;
 }
 
-// /photo-gallery → photo-gallery.php
-if (preg_match('#^([A-Za-z0-9-]+)/?$#', $path, $m) && file_exists(__DIR__ . '/' . $m[1] . '.php')) {
-    require __DIR__ . '/' . $m[1] . '.php';
+// /view/slug -> detail-view.php?slug=
+if (preg_match('#^view/([A-Za-z0-9-]+)/?$#i', $path, $m) && is_file($docroot . '/detail-view.php')) {
+    $_GET['slug'] = $m[1];
+    require $docroot . '/detail-view.php';
     return true;
 }
 
-// Fallback → index.php
-if ($path === '') {
-    require __DIR__ . '/index.php';
+// Clean URL -> existing .php file (e.g. /smart-classrooms -> smart-classrooms.php)
+if (!preg_match($staticExt, $path) && is_file($docroot . '/' . $path . '.php')) {
+    require $docroot . '/' . $path . '.php';
     return true;
 }
 
-http_response_code(404);
-require __DIR__ . '/404.php';
-return true;
+// Single-segment CMS page -> page-template.php?page=
+if (preg_match('#^([^/]+)/?$#', $path, $m) && !preg_match($staticExt, $m[1])) {
+    $_GET['page'] = $m[1];
+    require $docroot . '/page-template.php';
+    return true;
+}
+
+return false;

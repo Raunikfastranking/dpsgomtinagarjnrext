@@ -185,7 +185,7 @@ $ogMeta = [
                              </svg>
                              <?= $data['req_qualification'] ?? "" ?>
                          </li>
-                         <a href="job-apply.php?job_id=<?= $data['id'] ?? '' ?>">
+                         <a href="job-apply?job_id=<?= $data['id'] ?? '' ?>">
                              <button class="w-full rounded-full text-center text-white bg-blue-main p-2 mt-5">Apply
                                  Now</button></a>
                      </ul>

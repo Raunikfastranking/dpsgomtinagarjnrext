@@ -29,7 +29,7 @@
         <div class="flex m-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="index.php" class="inline-flex items-center text-sm font-medium text-blue-main">
+                    <a href="index" class="inline-flex items-center text-sm font-medium text-blue-main">
                         Home
                     </a>
                 </li>
@@ -39,7 +39,7 @@
                         <svg class="rtl:rotate-180 w-3 h-3 text-blue-main mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"></path>
                         </svg>
-                        <a href="about-us.php" class="ms-1 text-sm font-medium text-blue-main">About Us</a>
+                        <a href="about-us" class="ms-1 text-sm font-medium text-blue-main">About Us</a>
                     </div>
                 </li>
             </ol>
@@ -550,7 +550,7 @@
                                         pm.
                                         Buses will be there accordingly.
                                     </p>
-                                    <a href="news-event.php" class="font-[600] text-blue-main hover:text-red-600">View
+                                    <a href="news-event" class="font-[600] text-blue-main hover:text-red-600">View
                                         More <span class="relative top-[2px] left-[2px]"><i
                                                 class="fa-solid fa-arrow-up-long rotate-90"></i></span></a>
                                 </div>

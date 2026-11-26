@@ -31,7 +31,7 @@
         <div class="flex m-5 overflow-x-auto" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="index.php" class="inline-flex items-center sm:text-sm text-[10px] font-medium text-blue-main">
+                    <a href="index" class="inline-flex items-center sm:text-sm text-[10px] font-medium text-blue-main">
                         Home
                     </a>
                 </li>
@@ -75,7 +75,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4"></path>
                         </svg>
-                        <a href="domestic-outbounds.php" class="ms-1 sm:text-sm text-[10px] font-medium text-blue-main"> Domestic
+                        <a href="domestic-outbounds" class="ms-1 sm:text-sm text-[10px] font-medium text-blue-main"> Domestic
                             Outbounds</a>
                     </div>
                 </li>

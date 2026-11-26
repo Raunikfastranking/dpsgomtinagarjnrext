@@ -108,7 +108,7 @@ $meta_keywords = $gallery['meta_keywords'] ?? $gallery['data']['meta_keywords'] 
         <div class="flex m-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="index.php" class="inline-flex items-center sm:text-sm text-xs font-medium text-blue-main">
+                    <a href="index" class="inline-flex items-center sm:text-sm text-xs font-medium text-blue-main">
                         Home
                     </a>
                 </li>
@@ -125,7 +125,7 @@ $meta_keywords = $gallery['meta_keywords'] ?? $gallery['data']['meta_keywords'] 
                         <svg class="rtl:rotate-180 w-3 h-3 text-blue-main mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="photo-gallery.php" class="ms-1 sm:text-sm text-xs font-medium text-blue-main">
+                        <a href="photo-gallery" class="ms-1 sm:text-sm text-xs font-medium text-blue-main">
                             Photo Gallery
                         </a>
                     </div>
@@ -141,7 +141,7 @@ $meta_keywords = $gallery['meta_keywords'] ?? $gallery['data']['meta_keywords'] 
                     <p class="text-gray-500 mb-8 max-w-xl mx-auto">
                         The requested gallery could not be found or may have been removed.
                     </p>
-                    <a href="photo-gallery.php" class="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
+                    <a href="photo-gallery" class="inline-block px-8 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
                         Back to Photo Galleries
                     </a>
                 </div>

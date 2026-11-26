@@ -490,8 +490,8 @@
                             </a>
                         </li>
                         <li>
-                            <!-- href="admission-procedure.php" -->
-                            <a href="process.php"
+                            <!-- href="admission-procedure" -->
+                            <a href="process"
                                 class="w-full h-[110px] sm:h-auto border border-blue-main rounded-[12px] bg-[#FED72B]/20 sm:p-[20px]  transition-all duration-300 transform hover:scale-[1.03] custom-blue-hover flex-col sm:flex-row flex justify-center items-center">
                                 <img src="./assets/images/chat.png"
                                     alt=""
@@ -503,7 +503,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="campus-tour.php"
+                            <a href="campus-tour"
                                 class="w-full h-[110px] sm:h-auto border border-blue-main rounded-[12px] bg-[#FED72B]/20 sm:p-[20px]  transition-all duration-300 transform hover:scale-[1.03] custom-blue-hover flex-col sm:flex-row flex justify-center items-center">
                                 <img src="./assets/images/campus.png"
                                     alt=""
@@ -547,7 +547,7 @@
                                             In Action</span>
                                     </h2>
                                     <p class="mt-3 text-white">At our school, we believe that excellence is not a destination, but a continuous journey of learning, growth, and achievement</p>
-                                    <button class="w-[100%]"><a href="excellence-in-action.php"
+                                    <button class="w-[100%]"><a href="excellence-in-action"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -594,7 +594,7 @@
                                     </h2>
                                     <p class="mt-3 text-white">At our school, we believe every achievement—big or small—is a step towards greatness.</p>
 
-                                    <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence.php"
+                                    <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -639,7 +639,7 @@
                                             In the Spotlight</span>
                                     </h2>
                                     <p class="mt-3 text-white">At our school, excellence is more than an achievement—it is a way of life.</p>
-                                    <button class="w-[100%]"><a href="excellence-in-spotlight.php"
+                                    <button class="w-[100%]"><a href="excellence-in-spotlight"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -685,7 +685,7 @@
                                             Excellence</span>
                                     </h2>
                                     <p class="mt-3 text-white">Education is not just about reaching a destination—it is about embracing the journey.</p>
-                                    <button class="w-[100%]"><a href="embark-on-journey.php"
+                                    <button class="w-[100%]"><a href="embark-on-journey"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -738,7 +738,7 @@
                                                     In Action</span>
                                             </h2>
                                             <p class="mt-3 text-white">At our school, we believe that excellence is not a destination, but a continuous journey of learning, growth, and achievement</p>
-                                            <button class="w-[100%]"><a href="excellence-in-action.php"
+                                            <button class="w-[100%]"><a href="excellence-in-action"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -786,7 +786,7 @@
                                             </h2>
                                             <p class="mt-3 text-white">At our school, we believe every achievement—big or small—is a step towards greatness.</p>
 
-                                            <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence.php"
+                                            <button class="w-[100%]"><a href=""></a><a href="celebrating-excellence"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -834,7 +834,7 @@
                                                     In the Spotlight</span>
                                             </h2>
                                             <p class="mt-3 text-white">At our school, excellence is more than an achievement—it is a way of life.</p>
-                                            <button class="w-[100%]"><a href="excellence-in-spotlight.php"
+                                            <button class="w-[100%]"><a href="excellence-in-spotlight"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -882,7 +882,7 @@
                                                     Excellence</span>
                                             </h2>
                                             <p class="mt-3 text-white">Education is not just about reaching a destination—it is about embracing the journey.</p>
-                                            <button class="w-[100%]"><a href="embark-on-journey.php"
+                                            <button class="w-[100%]"><a href="embark-on-journey"
                                                     class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                     More
 
@@ -934,7 +934,7 @@
                                             In Action</span>
                                     </h2>
                                     <p class="mt-3 text-white">At Allenhouse Schools, excellence is more than a goal; it is a way of life.</p>
-                                    <button class="w-[100%]"><a href="excellence-in-action.php"
+                                    <button class="w-[100%]"><a href="excellence-in-action"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -981,7 +981,7 @@
                                     </h2>
                                     <p class="mt-3 text-white"> At Allenhouse Schools, excellence is not just a value we uphold; it is a way of life.</p>
 
-                                    <button class="w-[100%]"><a href=""><a href="celebrating-excellence.php"
+                                    <button class="w-[100%]"><a href=""><a href="celebrating-excellence"
                                                 class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                                 More
 
@@ -1025,7 +1025,7 @@
                                             In the Spotlight</span>
                                     </h2>
                                     <p class="mt-3 text-white"> At Allenhouse, the pursuit of excellence is not confined to the classroom.</p>
-                                    <button class="w-[100%]"><a href="excellence-in-spotlight.php"
+                                    <button class="w-[100%]"><a href="excellence-in-spotlight"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -1068,7 +1068,7 @@
                                             Excellence</span>
                                     </h2>
                                     <p class="mt-3 text-white">At Allenhouse Schools, the pursuit of excellence is more than a goal; it is a pledge.</p>
-                                    <button class="w-[100%]"><a href="embark-on-journey.php"
+                                    <button class="w-[100%]"><a href="embark-on-journey"
                                             class=" rounded-full text-blue-main p-2 font-[600] bg-white mt-5 flex justify-center items-center gap-2">Read
                                             More
 
@@ -1111,7 +1111,7 @@
                     <ul
                         class="relative w-full overflow-hidden p-0 whitespace-no-wrap flex flex-no-wrap [backface-visibility: hidden] [transform-style: preserve-3d] [touch-action: pan-Y] [will-change: transform]">
                         <li class="relative">
-                            <a href="excellence-in-action.php" class="img-hover">
+                            <a href="excellence-in-action" class="img-hover">
                                 <div
                                     class="absolute top-5 2xl:left-[20px] lg:left-[10px] md:left-[10px] left-[10px] flex">
                                     <h2 class="text-[35px] 2xl:text-[35px] lg:text-[24px] leading-8 font-[700]  "
@@ -1131,7 +1131,7 @@
                             </a>
                         </li>
                         <li class="relative">
-                            <a href="celebrating-excellence.php" class="img-hover">
+                            <a href="celebrating-excellence" class="img-hover">
                                 <div
                                     class="absolute top-5 2xl:left-[20px] lg:left-[10px] md:left-[10px] left-[10px] flex">
                                     <h2
@@ -1150,7 +1150,7 @@
                             </a>
                         </li>
                         <li class="relative">
-                            <a href="excellence-in-spotlight.php" class="img-hover">
+                            <a href="excellence-in-spotlight" class="img-hover">
                                 <div
                                     class="absolute top-5 2xl:left-[20px] lg:left-[10px] md:left-[10px] left-[10px] flex">
                                     <h2 class="text-[35px] 2xl:text-[35px] lg:text-[24px] leading-8 font-[700]  "
@@ -1168,7 +1168,7 @@
                             </a>
                         </li>
                         <li class="relative">
-                            <a href="embark-on-journey.php" class="img-hover">
+                            <a href="embark-on-journey" class="img-hover">
                                 <div
                                     class="absolute top-5 2xl:left-[20px] lg:left-[10px] md:left-[10px] left-[10px] flex">
                                     <h2
@@ -1403,22 +1403,22 @@
         <div class="container mx-auto">
 
             <ul class="grid sm:grid-cols-3 grid-cols-2 sm:gap-5 gap-3 sm:mt-5 mt-10 sm:mx-[80px] sm:px-0 px-3">
-                <li class="mx-auto"><a href="robotics.php" class=""><img
+                <li class="mx-auto"><a href="robotics" class=""><img
                             class="border-[1px] border-blue-main rounded-lg academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/robo.png" alt=""></a></li>
-                <li class="mx-auto"><a href="sports.php" class=""><img
+                <li class="mx-auto"><a href="sports" class=""><img
                             class="border-[1px] border-blue-main rounded-lg academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/northwest.png" alt=""></a></li>
-                <li class="mx-auto"><a href="animation.php" class=""><img
+                <li class="mx-auto"><a href="animation" class=""><img
                             class="border-[1px] rounded-lg border-blue-main  academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/ams.png" alt=""></a></li>
-                <li class="mx-auto"><a href="oluxi-smart-skill.php" class=""><img
+                <li class="mx-auto"><a href="oluxi-smart-skill" class=""><img
                             class="border-[1px] border-blue-main rounded-lg academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/oss.png" alt=""></a></li>
-                <li class="mx-auto"><a href="coding.php" class=""><img
+                <li class="mx-auto"><a href="coding" class=""><img
                             class="border-[1px] border-blue-main rounded-lg academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/dojo.png" alt=""></a></li>
-                <li class="mx-auto"><a href="social-intelligence.php" class=""><img
+                <li class="mx-auto"><a href="social-intelligence" class=""><img
                             class="border-[1px] border-blue-main rounded-lg academic-box sm:w-[80%] w-[] hover:shadow-[6px_8px_20px_rgba(0,82,36,0.8)] transition-shadow duration-300"
                             src="./assets/images/social.png" alt=""></a></li>
             </ul>
@@ -1451,7 +1451,7 @@
                 </div>
 
                 <div class="mt-3">
-                    <a href="cambridge.php" class="text-[15px] text-blue-main font-[600]">Read More...</a>
+                    <a href="cambridge" class="text-[15px] text-blue-main font-[600]">Read More...</a>
                 </div>
             </div>
         </div>
@@ -2785,7 +2785,7 @@
                             class="block w-[10px] h-[10px] transition-colors duration-300 rounded-full bg-gray-300 focus:outline-none"></span></button>
                 </div> -->
                 <div class="text-center mt-3">
-                    <a href="photo-gallery.php"
+                    <a href="photo-gallery"
                         class="text-[16px]font-[600] rounded-[20px] p-[5px] px-4 border-[1px] border-blue-main  hover:bg-[#005224] hover:text-white hover:boder-[#FED72B]">View
                         All</a>
                 </div>
