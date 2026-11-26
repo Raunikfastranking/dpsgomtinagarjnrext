@@ -38,7 +38,7 @@ Cambridge-affiliated School in Lucknow
     <div class="main relative  mb-[40px] sm:mb-[120px] ">
         <?php
         if ($bcsl_page !== null) {
-            cmsRenderCambridgePage($bcsl_page);
+            cmsRenderCambridgePage($bcsl_page, ['ee_enquiry_form' => true]);
         } else {
             cmsRenderPageBanner(null, []);
             cmsRenderPageBreadcrumbs(null, []);

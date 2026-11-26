@@ -131,7 +131,7 @@
         <div class="flex m-5" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                 <li class="inline-flex items-center">
-                    <a href="index" class="inline-flex items-center sm:text-sm text-xs font-medium text-blue-main">
+                    <a href="index.php" class="inline-flex items-center sm:text-sm text-xs font-medium text-blue-main">
                         Home
                     </a>
                 </li>
@@ -142,7 +142,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 9 4-4-4-4" />
                         </svg>
-                        <a href="admission-enquiry" class="ms-1 sm:text-sm text-xs font-medium text-blue-main">Admission
+                        <a href="admission-enquiry.php" class="ms-1 sm:text-sm text-xs font-medium text-blue-main">Admission
                             Enquiry</a>
                     </div>
                 </li>
@@ -194,7 +194,7 @@
         <div class="sm:mt-20 mt-10 mx-4 2xl:w-[1280px] lg:w-[1024px] md:w-[767px] sm:w-[640px] sm:mx-auto sm:px-5 px-4">
             <div class="relative">
                 <h2 class="text-center sm:text-[32px] text-[28px] font-[700] text-blue-main leading-9">
-                    Enquiry Form | Session 2025–2026
+                    Enquiry Form | Session 2027-2028
                 </h2>
                 <div class="mt-10">
                     <form id="enquiryForm" method="post">
@@ -268,7 +268,7 @@
                         <!-- Terms -->
                         <div class="mt-4 flex items-center gap-2">
                             <input type="checkbox" id="terms" required>
-                            <label for="terms">I agree to <a href="termsandconditions"
+                            <label for="terms">I agree to <a href="termsandconditions.php"
                                     class="text-blue-500 underline">Terms and
                                     Conditions</a>.</label>
                         </div>

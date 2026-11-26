@@ -1,6 +1,12 @@
 <?php
 include "includes/apis.php";
-$videos = $testimonial_data['data']['sections'][2]['resolved_content']['media'] ?? [];
+$videos = [];
+foreach (($testimonial_data['data']['sections'] ?? []) as $section) {
+    if (($section['section_type'] ?? '') === 'video' && !empty($section['resolved_content']['media'])) {
+        $videos = $section['resolved_content']['media'];
+        break;
+    }
+}
 
 ?>
 <html lang="en">
@@ -288,14 +294,12 @@ $videos = $testimonial_data['data']['sections'][2]['resolved_content']['media'] 
                                                 $videoUrl = $video["media_url"] ?? '';
                                                 $embedUrl = "";
 
-                                                if (strpos($videoUrl, 'youtube') !== false) {
-                                                    // Extract video ID
-                                                    preg_match('/(youtu\.be\/|v=)([^&]+)/', $videoUrl, $matches);
-                                                    $videoId = $matches[2] ?? '';
+                                                if (preg_match('/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/shorts\/)([^&\?\/]+)/i', $videoUrl, $matches)) {
+                                                    $embedUrl = 'https://www.youtube.com/embed/' . $matches[1];
+                                                }
 
-                                                    if ($videoId) {
-                                                        $embedUrl = "https://www.youtube.com/embed/" . $videoId;
-                                                    }
+                                                if ($embedUrl === '') {
+                                                    continue;
                                                 }
                                                 ?>
                                                 <li>
