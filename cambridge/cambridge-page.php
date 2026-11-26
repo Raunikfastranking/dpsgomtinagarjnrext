@@ -725,7 +725,7 @@ if (!function_exists('cmsCambridgeRenderContact')) {
             <div class="contact-copy">
                 <?= $copyHtml ?>
                 <div class="contact-actions">
-                    <a class="button red" href="#AdmissionForm">Enquire About Admissions <span>&rarr;</span></a>
+                    <a class="button red" href="#admissionProcedureEnquiry">Enquire About Admissions <span>&rarr;</span></a>
                     <a class="button outline<?= cmsCambridgeBrochureDisabledClass() ?>"<?= cmsCambridgeBrochureLinkAttrs() ?>>Download Brochure <span>&darr;</span></a>
                 </div>
             </div>
@@ -745,6 +745,100 @@ if (!function_exists('cmsCambridgeRenderEnquiryForm')) {
     {
         $includesDir = dirname(__DIR__) . '/includes';
         $includeBoard = !function_exists('cmsEnquiryFormIncludeBoard') || cmsEnquiryFormIncludeBoard();
+
+        if (!empty($GLOBALS['cmsCambridgeEeEnquiryForm'])) {
+            ?>
+            <div id="admissionProcedureEnquiry" class="cb-enquiry">
+                <div class="enquiry-form">
+                    <h3>Enquiry Form</h3>
+                    <style>
+                        /* ExtraaEdge enquiry widget — single column, taller inputs, spacing */
+                        #ee-form-18 .ee-form-widget .ee-form-body {
+                            display: block !important;
+                        }
+                        #ee-form-18 .ee-form-widget .ee-form-body .ee-row {
+                            width: 100% !important;
+                            margin-right: 0 !important;
+                            margin-left: 0 !important;
+                            margin-bottom: 18px;
+                        }
+                        #ee-form-18 .ee-form-widget input:not([type=checkbox]):not([type=radio]):not([type=search]):not([type=tel]),
+                        #ee-form-18 .ee-form-widget select {
+                            height: 48px !important;
+                            padding: 10px 12px !important;
+                        }
+                        #ee-form-18 .ee-form-widget .iti input[type=tel] {
+                            height: 48px !important;
+                            padding-top: 10px !important;
+                            padding-bottom: 10px !important;
+                        }
+                        #ee-form-18 .ee-form-widget .iti--separate-dial-code input[type=tel],
+                        #ee-form-18 .ee-form-widget .iti--separate-dial-code input[type=text] {
+                            padding-left: 96px;
+                        }
+                        #ee-form-18 .ee-form-widget .select2-container .select2-selection--single {
+                            height: 48px !important;
+                            padding: 10px 12px !important;
+                            border: 1px solid var(--ee-border-color) !important;
+                            border-radius: 4px;
+                            display: flex;
+                            align-items: center;
+                        }
+                        #ee-form-18 .ee-form-widget .select2-selection--single .select2-selection__rendered {
+                            line-height: normal !important;
+                            padding: 0 !important;
+                        }
+                        #ee-form-18 .ee-form-widget .select2-selection--single .select2-selection__arrow {
+                            height: 46px !important;
+                        }
+                        #ee-form-18 .ee-form-widget .ee-form-heading {
+                            display: none;
+                        }
+                        #ee-form-18 .ee-form-widget .btnContainer {
+                            display: block;
+                        }
+                        #ee-form-18 .ee-form-widget .btn.btn-submit {
+                            width: 100%;
+                            padding: 14px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            border-radius: 4px;
+                            background-color: #005224 !important;
+                            border-color: #005224 !important;
+                        }
+                        #ee-form-18 .ee-form-widget .btn.btn-submit:hover {
+                            background-color: #003618 !important;
+                            border-color: #003618 !important;
+                        }
+                    </style>
+                    <div id="ee-form-18"></div>
+                </div>
+            </div>
+            <script>
+                // ==================== EXTRAAEDGE ENQUIRY FORM WIDGET ====================
+                window.addEventListener("DOMContentLoaded", function() {
+                    window.ee_form_widget_baseurl = "https://eeconfigstaticfiles.blob.core.windows.net/staticfiles/ee-form-widget/";
+                    if (!document.getElementById("__formWidgetCss")) {
+                        var e = document.createElement("link");
+                        e.id = "__formWidgetCss";
+                        e.rel = "stylesheet";
+                        e.href = window.ee_form_widget_baseurl + "css/stylesheet.min.css";
+                        e.type = "text/css";
+                        document.getElementsByTagName("head")[0].appendChild(e);
+                    }
+                    var t = document.createElement("script");
+                    t.type = "text/javascript";
+                    t.onload = async function() {
+                        _eeFormWidget = new eeFormWidget;
+                        await _eeFormWidget.init("superhouseeducation", "form-18", "ee-form-18");
+                    };
+                    t.src = window.ee_form_widget_baseurl + "js/eeFormWidget.min.js";
+                    document.getElementsByTagName("head")[0].appendChild(t);
+                });
+            </script>
+            <?php
+            return;
+        }
         ?>
         <div id="admissionProcedureEnquiry" class="cb-enquiry">
             <div id="AdmissionFormPopup" class="cb-form-popup hidden" role="status">Form submitted successfully!</div>
@@ -925,6 +1019,8 @@ if (!function_exists('cmsRenderCambridgePage')) {
         if (!is_array($page)) {
             return;
         }
+
+        $GLOBALS['cmsCambridgeEeEnquiryForm'] = !empty($options['ee_enquiry_form']);
 
         cmsRenderPageBanner($page, $options);
         cmsRenderPageBreadcrumbs($page, $options);

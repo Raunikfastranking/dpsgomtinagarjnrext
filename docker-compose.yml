@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    container_name: dpsgomtinagarjnrext
+    ports:
+      - "8088:80"
+    volumes:
+      - ./:/var/www/html
